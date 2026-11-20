@@ -1,32 +1,26 @@
-const fetch = require("node-fetch");
 const fetchCache = require("./../lib/fetch-cache");
 const mime = require("mime-types");
 
-module.exports = async function get(req, res, next) {
+module.exports = async function get(req) {
   const { user, id } = req.params;
   const file = req.params.file || 'index.html';
 
   const url = `https://gist.githubusercontent.com/${user}/${id}/raw/${file}`;
   try {
     const type = mime.lookup(file) || '';
-    if (type.match(/^image/)) {
-      fetch(url).then(async (resp) => {
-        resp.headers.forEach((v, n) => res.setHeader(n, v));
-        resp.body.pipe(res);
-      });
-    } else {
-      let text = await fetchCache(url, "text");
-      if (file.includes(".html")) text = text.replace(/http:\/\//g, "//");
+    if (type.match(/^image/)) return await fetch(url);
 
-      res.writeHead("200", {
-        "Content-Type": type,
+    let text = await fetchCache(url, "text");
+    if (file.includes(".html")) text = text.replace(/http:\/\//g, "//");
+
+    return new Response(text, {
+      headers: {
+        "Content-Type": type || "text/plain",
         "Cache-Control": "public, max-age=" + 1000 * 60,
-      });
-      res.end(text);
-    }
+      },
+    });
   } catch (e) {
     console.log("missing", e);
-    res.writeHead("404");
-    res.end("");
+    return new Response("", { status: 404 });
   }
 };

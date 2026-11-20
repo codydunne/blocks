@@ -459,7 +459,7 @@ function generateHTML(){
     <p>
       <a href='https://github.com/codydunne/blocks'>Open source</a> 
       clone of 
-      <a href='https://github.com/chart-code/blocks'>Open source</a>
+      <a href='https://github.com/chart-code/blocks'>blocks.roadtolarissa.com</a>
       which is a clone of
       <a href='https://web.archive.org/web/20170710170952/https://bl.ocks.org/-/about'>bl.ocks.org</a> 
       — get started with <a href='https://bost.ocks.org/mike/block/'>Let’s Make a Block</a> and <a href='https://github.com/1wheel/d3-init'>d3-init</a>.
@@ -471,10 +471,9 @@ function generateHTML(){
   `
 }
 
-module.exports = async function get(req, res, next) {
+module.exports = async function get() {
   var html = generateHTML()
-  res.writeHead(200, {'Content-Type': 'text/html'})
-  res.end(html)
+  return new Response(html, {headers: {'Content-Type': 'text/html'}})
 }
 
 

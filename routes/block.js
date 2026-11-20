@@ -146,12 +146,12 @@ async function generateHTML(user, id, gist, query){
   `
 }
 
-module.exports = async function get(req, res, next) {
+module.exports = async function get(req) {
   var {user, id} = req.params
   var url = `https://api.github.com/gists/${id}`
   var gist = await fetchCache(url, 'json')
   var html = await generateHTML(user, id, gist, req.query)
+  if (!html) return new Response('', {status: 404})
 
-  res.writeHead(200, {'Content-Type': 'text/html'})
-  res.end(html)
+  return new Response(html, {headers: {'Content-Type': 'text/html'}})
 }

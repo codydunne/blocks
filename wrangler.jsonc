@@ -1,0 +1,9 @@
+{
+  "name": "blocks",
+  "main": "worker.js",
+  "routes": [{ "pattern": "blocks.dunne.dev", "custom_domain": true }],
+  "compatibility_date": "2025-09-01",
+  // mime-types needs node:path
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": "./static", "binding": "ASSETS" }
+}

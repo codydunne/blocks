@@ -1,24 +1,22 @@
 {
   "name": "bl.ocks",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:chart-code/bl.ocks.git",
+  "main": "worker.js",
+  "repository": "git@github.com:codydunne/blocks.git",
   "license": "MIT",
   "dependencies": {
-    "await-exec": "^0.1.2",
-    "compression": "^1.7.4",
     "d3": "^5.12.0",
     "highlight.js": "^9.15.10",
-    "indian-ocean": "^4.0.0",
     "marked": "^0.7.0",
-    "polka": "^0.5.2",
-    "r2": "^2.0.1",
-    "minimist": "1",
+    "mime-types": "^2.1.35",
     "underscore": "^1.9.1"
   },
   "scripts": {
-    "dev": "node index.js --dev=true",
-    "start": "node index.js",
-    "pub": "bin/pub.sh"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy && sed -n 's/^GITHUB_TOKEN=//p' .env | tr -d '\\r' | wrangler secret put GITHUB_TOKEN",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "wrangler": "^4.165.0"
   }
 }
