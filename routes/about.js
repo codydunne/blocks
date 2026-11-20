@@ -113,6 +113,7 @@ function generateHTML(){
     'cmackay',
     'cmgiven',
     'cmpolis',
+    'codydunne',
     'corykendrick',
     'couchand',
     'cpbotha',
@@ -456,14 +457,17 @@ function generateHTML(){
     <title>blocks</title>
 
     <p>
-      <a href='https://github.com/chart-code/blocks'>Open source</a> 
+      <a href='https://github.com/codydunne/blocks'>Open source</a> 
       clone of 
+      <a href='https://github.com/chart-code/blocks'>Open source</a>
+      which is a clone of
       <a href='https://web.archive.org/web/20170710170952/https://bl.ocks.org/-/about'>bl.ocks.org</a> 
       — get started with <a href='https://bost.ocks.org/mike/block/'>Let’s Make a Block</a> and <a href='https://github.com/1wheel/d3-init'>d3-init</a>.
+      This fork: <a href='https://github.com/codydunne/blocks'>codydunne/blocks</a>.
 
     <p id='people'>${people.map(d => `<a href='/${d}'>${d}</a> `).join('')}
 
-    <p> <a href='https://github.com/chart-code/blocks/blob/master/routes/about.js#L2'>Add your username!</a>
+    <p> <a href='https://github.com/codydunne/blocks/blob/master/routes/about.js#L2'>Add your username!</a>
   `
 }
 
